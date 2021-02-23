@@ -1,0 +1,7 @@
+GET {{baseurl}}/api/todos/ HTTP/1.1
+Content-Type: application/json
+
+#GET {{baseurl}}/?api-version={apiversion}&
+#Content-Type: application/json
+#Authorization: {{authToken}}
+#Osc-Apim-Subscription-Key: {{$processEnv %secretKey}}

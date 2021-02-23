@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "rest-client.environmentVariables": {
+        "sandbox": {
+            "baseurl": "http://localhost:8000",
+            "authToken": "Bearer eysafew23....",
+            "secretKey": "ENV_VARIABLE_NAME"
+        }
+    }
+}
