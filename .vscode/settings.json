@@ -6,5 +6,6 @@
             "authToken": "Bearer eysafew23....",
             "secretKey": "ENV_VARIABLE_NAME"
         }
-    }
+    },
+    "python.formatting.provider": "yapf"
 }
