@@ -153,9 +153,9 @@ COPY . /app/backend
 
 #EXPOSE 8000
 
-COPY init.sh /usr/local/bin/
-
 ENV DJANGO_LOG_LEVEL=DEBUG
+
+COPY init.sh /usr/local/bin/
 
 RUN chmod u+x /usr/local/bin/init.sh
 ENTRYPOINT [ "init.sh" ]

@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  backend:
+    image: todo-test-backend
+    container_name: "todo-backend"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    #command: "./init.sh"
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+
+  ###############
+  # Setup client container
+  ###############
+  frontend:
+    image: todo-test-frontend
+    container_name: "todo-frontend"
+    build:
+      context: ./frontend
+    #command: "./entry_point.sh"
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    
