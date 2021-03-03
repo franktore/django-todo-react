@@ -26,8 +26,9 @@ SECRET_KEY = '^k65m92%(h%17k_26=(-p2q5fhy_wufcz20#bai$x28&mk)!z5'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost', '127.0.0.1', 'todo-backend',
-    'django-react-todo-app.azurewebsites.net'
+    'localhost', '127.0.0.1', 'backend', 'todo-backend',
+    'django-react-todo-app.azurewebsites.net',
+    'my-important-todos.azurewebsites.net'
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer"

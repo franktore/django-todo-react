@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   backend:
-    image: todo-test-backend
+    image: todotestcg.azurecr.io/todo-test-backend
     container_name: "todo-backend"
     build:
       context: ./backend
@@ -17,13 +17,17 @@ services:
   # Setup client container
   ###############
   frontend:
-    image: todo-test-frontend
+    image: todotestcg.azurecr.io/todo-test-frontend
     container_name: "todo-frontend"
+    # environment:
+      # - BACKEND_URL="todo-backend"
+    env_file:
+      - ./frontend/frontend.env
     build:
       context: ./frontend
     #command: "./entry_point.sh"
     expose:
-      - "3000"
+      - "80"
     ports:
-      - "3000:3000"
+      - "80:3000"
     

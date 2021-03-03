@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "proxy": "http://todo-backend:8000",
+  "proxy": "http://backend:8000",
   "secure": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
