@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  ###############
+  # Setup client container
+  ###############
+  frontend:
+    image: todotestcg.azurecr.io/todo-test-frontend:latest
+    container_name: "todo-frontend"
+    environment:
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true
+    build:
+      context: ./frontend
+    networks:
+      - base
+    command: "./entry_point.sh"
+    expose:
+      - "80"
+    ports:
+      - "80:3000"
+  ###############
+  # Setup backend container
+  ###############
+  backend:
+    image: todotestcg.azurecr.io/todo-test-backend:latest
+    container_name: "todo-backend"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    #command: "./init.sh"
+    networks:
+      base:
+        aliases:
+          - todo-backend
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+
+networks:
+  base:
