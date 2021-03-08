@@ -11,9 +11,11 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '2b69996a-e740-4c4f-b4af-7dbcd24aa5a6'
-  imageRepository: 'franktoredjangotodoreact'
+  backendImageRepository: 'djangotodoreact-backend'
+  frontendImageRepository: 'djangotodoreact-frontend'
   containerRegistry: 'todotestcg.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/backend/Dockerfile'
+  backendDockerfilePath: '$(Build.SourcesDirectory)/backend/Dockerfile'
+  frontendDockerfilePath: '$(Build.SourcesDirectory)/frontend/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -23,7 +25,7 @@ stages:
 - stage: Build
   displayName: Build and push stage
   jobs:
-  - job: Build
+  - job: Backend
     displayName: Build
     pool:
       vmImage: $(vmImageName)
@@ -31,7 +33,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: '$(dockerRegistryServiceConnection)'
-        repository: '$(imageRepository)'
+        repository: '$(backendImageRepository)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
@@ -39,8 +41,30 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
+        repository: $(backendImageRepository)
+        dockerfile: $(backendDockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+  - job: Frontend
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(frontendImageRepository)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(frontendImageRepository)
+        dockerfile: $(frontendDockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
