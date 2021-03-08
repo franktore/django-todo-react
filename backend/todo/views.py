@@ -7,6 +7,6 @@ from todo import logger
 
 # Create your views here.
 class TodoView(viewsets.ModelViewSet):
-    logger.info("entered todoview!!")
+    logger.info("entered todoview!!!")
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
