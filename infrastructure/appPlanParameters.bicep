@@ -25,3 +25,4 @@ resource appPlan 'Microsoft.Web/serverfarms@2020-06-01' = {
 }
 
 output planId string = appPlan.id
+output planName string = appPlan.name

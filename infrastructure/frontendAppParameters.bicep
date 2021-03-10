@@ -1,10 +1,10 @@
 param namePrefix string
 param serverfarmId string
+param containerReg string
 param sku string = 'B1'
 
 resource appResource 'Microsoft.Resources/deployments@2020-06-01' = {
   name: '${namePrefix}-frontendDeploy'
-  location: resourceGroup().location
   properties: {
     mode: 'Incremental'
     templateLink: {
@@ -12,13 +12,30 @@ resource appResource 'Microsoft.Resources/deployments@2020-06-01' = {
       contentVersion: '1.0.0.0'
     }
     parameters: {
-      webAppName: '${namePrefix}-frontend'
-      tags: namePrefix
-      appserviceResourceId: resourceId('Microsoft.Web/serverfarms', '${namePrefix}-appPlan')
-      containerRegistryName: '${namePrefix}Containerreg'
-      containerImageTag: 'latest'
-      environmentVariables: []
-      appGatewayIp: 'Any'
+      webAppName: {
+        'value': 'franktores-${namePrefix}-frontend'
+      }
+      tags: {
+        'value': {
+          'Environment': namePrefix
+        }
+      }
+      appserviceResourceId: {
+        // 'value': resourceId('Microsoft.Web/serverfarms', '${namePrefix}-appPlan')
+        'value': serverfarmId
+      }
+      containerRegistryName: {
+        'value': '${containerReg}'
+      }
+      containerImageTag: {
+        'value': 'latest'
+      }
+      environmentVariables: {
+        'value': []
+      }
+      appGatewayIp: {
+        'value': 'Any'
+      }
     }
   }
   // dependsOn:[]

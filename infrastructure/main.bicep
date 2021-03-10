@@ -30,6 +30,8 @@ module frontendAppDeploy 'frontendAppParameters.bicep' = {
   scope: rgScope
   params: {
     namePrefix: environment
+    serverfarmId: appPlanDeploy.outputs.planId
+    containerReg: containerRegDeploy.outputs.containerRegName
   }
 }
 
