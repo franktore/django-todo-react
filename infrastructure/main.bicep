@@ -25,11 +25,19 @@ module containerRegDeploy 'containerRegParameters.bicep' = {
   }
 }
 
-module siteDeploy 'site.bicep' = {
-  name: 'siteDeploy'
+module frontendAppDeploy 'frontendAppParameters.bicep' = {
+  name: 'frontendAppDeploy'
   scope: rgScope
   params: {
-    namePrefix: 'todo-rg-${environment}'
-    serverfarmId: appPlanDeploy.outputs.planId
+    namePrefix: environment
   }
 }
+
+// module siteDeploy 'site.bicep' = {
+//   name: 'siteDeploy'
+//   scope: rgScope
+//   params: {
+//     namePrefix: 'todo-rg-${environment}'
+//     serverfarmId: appPlanDeploy.outputs.planId
+//   }
+// }
